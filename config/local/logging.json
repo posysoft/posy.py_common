@@ -1,0 +1,58 @@
+{
+    "log": {
+        "formatters": {
+            "default_formatter": {
+                "format": "%(asctime)s %(levelname)s %(message)s"
+            },
+            "detail_formatter": {
+                "format": "[%(filename)s:%(lineno)d] %(asctime)s %(levelname)s %(message)s"
+            }
+        },
+        "handlers": {
+            "file_handler": {
+                "class": "logging.handlers.TimedRotatingFileHandler",
+                "args": "('../log/%(app_type)s.%(app_name)s.log', 'MIDNIGHT')",
+                "formatter": "detail_formatter",
+                "level": "DEBUG"
+            },
+            "info_handler": {
+                "class": "logging.handlers.TimedRotatingFileHandler",
+                "args": "('../log/%(app_type)s.%(app_name)s.info.log', 'MIDNIGHT')",
+                "formatter": "default_formatter",
+                "level": "INFO"
+            },
+            "warn_handler": {
+                "class": "logging.handlers.TimedRotatingFileHandler",
+                "args": "('../log/%(app_type)s.%(app_name)s.warn.log', 'MIDNIGHT')",
+                "formatter": "default_formatter",
+                "level": "WARNING"
+            },
+            "debug_handler": {
+                "class": "logging.handlers.TimedRotatingFileHandler",
+                "args": "('../log/%(app_type)s.%(app_name)s.debug.log', 'MIDNIGHT')",
+                "formatter": "default_formatter",
+                "level": "DEBUG"
+            },
+            "error_handler": {
+                "class": "logging.handlers.TimedRotatingFileHandler",
+                "args": "('../log/%(app_type)s.%(app_name)s.error.log', 'MIDNIGHT')",
+                "formatter": "detail_formatter",
+                "level": "ERROR"
+            },
+            "console_handler": {
+                "class": "logging.StreamHandler",
+                "formatter": "detail_formatter",
+                "level": "DEBUG",
+                "args": "(sys.stdout, )"
+            }
+        },
+        "loggers": {
+            "root": {
+                "handlers": "file_handler,info_handler,warn_handler,debug_handler,error_handler,console_handler",
+                "level": "DEBUG",
+                "propagate": "1",
+                "qualname": "root"
+            }
+        }
+    }
+}
